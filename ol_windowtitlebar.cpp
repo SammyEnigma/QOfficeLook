@@ -92,7 +92,6 @@ void OL_WindowTitleBar::toggleSize()
     } else {
         _mainWin->setWindowState(Qt::WindowNoState);
     }
-    //adjustMenuAndButtons();
 }
 
 void OL_WindowTitleBar::addAction(QIcon &icon, const QObject *receiver, const char *slot, const QString &tooltip, const QKeySequence &shortcut)
@@ -130,19 +129,16 @@ void OL_WindowTitleBar::slot_close()
 void OL_WindowTitleBar::slot_restore()
 {
     _mainWin->setWindowState(Qt::WindowNoState);
-    //adjustMenuAndButtons();
 }
 
 void OL_WindowTitleBar::slot_maximize()
 {
     _mainWin->setWindowState(Qt::WindowMaximized);
-    //adjustMenuAndButtons();
 }
 
 void OL_WindowTitleBar::slot_minimize()
 {
     _mainWin->setWindowState(Qt::WindowMinimized);
-    //adjustMenuAndButtons();
 }
 
 void OL_WindowTitleBar::slot_size()
