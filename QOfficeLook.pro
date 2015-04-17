@@ -27,9 +27,9 @@ CONFIG(app) {
                     ol_flatbutton.cpp \
                     ol_frame.cpp
 
-    win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../lib/ -lQRibbonPlugin
-    else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../lib/ -lQRibbonPlugind
-    else:unix: LIBS += -L$$PWD/../lib/ -lQRibbonPlugin
+    win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../lib/ -lQRibbon
+    else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../lib/ -lQRibbond
+    else:unix: LIBS += -L$$PWD/../lib/ -lQRibbon
 
     INCLUDEPATH += $$PWD/../include
     DEPENDPATH += $$PWD/../include
@@ -39,7 +39,11 @@ CONFIG(app) {
 } else {
     warning(Lib config)
 
-    TARGET = QOfficeLook
+    CONFIG(installd) {
+        TARGET = QOfficeLookd
+    } else {
+        TARGET = QOfficeLook
+    }
     TEMPLATE = lib
 
     DEFINES += QOFFICELOOK_LIBRARY
@@ -54,6 +58,9 @@ CONFIG(app) {
             ol_windowtitlebar.h \
             ol_flatbutton.h \
             ol_frame.h
+
+    target.path = ../lib
+    INSTALLS += target
 
     header_files.files = $$HEADERS
     header_files.path = ../include
@@ -73,6 +80,9 @@ unix {
 
 RESOURCES += \
     qofficelook.qrc
+
+DISTFILES += \
+    memorycheck.bat
 
 
 
