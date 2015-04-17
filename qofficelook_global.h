@@ -1,0 +1,16 @@
+#ifndef QOFFICELOOK_GLOBAL_H
+#define QOFFICELOOK_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(QOFFICELOOK_LIBRARY)
+#  define QOFFICELOOKSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  if defined(QOFFICELOOK_TEST)
+#    define QOFFICELOOKSHARED_EXPORT
+#  else
+#    define QOFFICELOOKSHARED_EXPORT Q_DECL_IMPORT
+#  endif
+#endif
+
+#endif // QOFFICELOOK_GLOBAL_H
