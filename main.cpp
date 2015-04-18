@@ -1,4 +1,4 @@
-#include <vld.h>
+//#include <vld.h>
 #include <QApplication>
 #include "qofficelooktest.h"
 #include "qofficelook.h"
