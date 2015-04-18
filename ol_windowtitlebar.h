@@ -9,6 +9,7 @@
 #include <QMenu>
 #include <QPushButton>
 #include <QSizeGrip>
+#include <QApplication>
 
 class OL_WindowTitleBar : public QWidget
 {
@@ -18,12 +19,16 @@ private:
     QLabel *_title;
     QMenu  *_smenu;
     OL_FlatButton *_systemMenu, *_close, *_minimize, *_maximize, *_restore;
+    QApplication * _app;
     QMainWindow *_mainWin;
     QPoint _origin;
     QWidget*_leftActions, *_rightActions;
+    void *_filter;
 
 public:
     void adjustMenuAndButtons();
+    QApplication *application();
+    void activateSysMenu();
 
 public:
     void setTitle(const QString &t);
@@ -34,7 +39,7 @@ public:
     void addRightAction(QIcon &icon, const QObject *receiver = 0, const char *slot = 0, const QString &tooltip = 0, const QKeySequence & shortcut = 0);
 
 public:
-    explicit OL_WindowTitleBar(QMainWindow *w, QWidget *parent = 0);
+    explicit OL_WindowTitleBar(QApplication *a, QMainWindow *w, QWidget *parent = 0);
     ~OL_WindowTitleBar();
 
 signals:

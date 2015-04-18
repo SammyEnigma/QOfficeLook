@@ -17,7 +17,7 @@ QOfficeLook *QOfficeLook::adaptMainWindow(QApplication *app, QMainWindow *w)
 {
     QWidget *mainwin = w->centralWidget();
 
-    OL_WindowTitleBar *tb = new OL_WindowTitleBar(w, w);
+    OL_WindowTitleBar *tb = new OL_WindowTitleBar(app, w, w);
     QString t = w->windowTitle();
     tb->setTitle(t);
 

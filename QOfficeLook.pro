@@ -34,6 +34,9 @@ CONFIG(app) {
     INCLUDEPATH += $$PWD/../include
     DEPENDPATH += $$PWD/../include
 
+    INCLUDEPATH += "C:\Program Files (x86)\Visual Leak Detector\include"
+    LIBS += -L"C:\Program Files (x86)\Visual Leak Detector\lib\win32" -lvld
+
     TARGET = qofficelooktest
 
 } else {

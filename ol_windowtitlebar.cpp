@@ -1,12 +1,53 @@
 #include "ol_windowtitlebar.h"
+#include <QAbstractNativeEventFilter>
 #include <QEvent>
 #include <QGridLayout>
 #include <QMouseEvent>
+#include <QShortcut>
+
+#define WM_SYSCOMMAND 0x0112
+#define WM_SYSKEYUP   0x0105
 
 
-OL_WindowTitleBar::OL_WindowTitleBar(QMainWindow * w, QWidget *parent) : QWidget(parent)
+struct tagMSG {
+    void *hwnd;
+    long message;
+};
+
+class Filter : public QAbstractNativeEventFilter {
+private:
+    OL_WindowTitleBar *_bar;
+
+public:
+    Filter(OL_WindowTitleBar *bar)
+    {
+        _bar = bar;
+        _bar->application()->installNativeEventFilter(this);
+    }
+
+    bool nativeEventFilter(const QByteArray & eventType, void * message, long * result)
+    {
+#ifdef Q_OS_WIN
+        if (eventType == "windows_generic_MSG") {
+           MSG *msg = (MSG *) message;
+           if (msg->message == WM_SYSKEYUP) {
+              _bar->activateSysMenu();
+              return true;
+           }
+        }
+#endif
+        return false;
+    }
+};
+
+
+OL_WindowTitleBar::OL_WindowTitleBar(QApplication * a, QMainWindow * w, QWidget *parent) : QWidget(parent)
 {
+    _app = a;
     _mainWin = w;
+
+    _filter = (void *) new Filter(this);
+    _app->installNativeEventFilter((Filter *) _filter);
 
     _title = new QLabel("<title>", this);
     _title->setAlignment(Qt::AlignCenter);
@@ -17,6 +58,12 @@ OL_WindowTitleBar::OL_WindowTitleBar(QMainWindow * w, QWidget *parent) : QWidget
     this->setAutoFillBackground(true);
 
     _systemMenu = new OL_FlatButton(w->windowIcon(), parent);
+
+    /*QShortcut *sm = new QShortcut(QKeySequence(Qt::Key_Space), _systemMenu);
+    sm->setContext(Qt::ApplicationShortcut);
+    connect(sm, SIGNAL(activated()), _systemMenu, SLOT(showMenu()));*/
+
+
     _smenu = new QMenu(w);
     _smenu->addAction(QIcon(":/icons/restore.svg"), tr("&Restore"), this, SLOT(slot_restore()));
     _smenu->addAction(tr("&Move"), this, SLOT(slot_move()));
@@ -118,7 +165,8 @@ void OL_WindowTitleBar::addRightAction(QIcon &icon, const QObject *receiver, con
 
 OL_WindowTitleBar::~OL_WindowTitleBar()
 {
-
+    Filter *f = (Filter *) _filter;
+    delete f;
 }
 
 void OL_WindowTitleBar::slot_close()
@@ -149,6 +197,11 @@ void OL_WindowTitleBar::slot_size()
 void OL_WindowTitleBar::slot_move()
 {
 
+    QPoint p = _mainWin->pos();
+    QSize  s = this->size();
+    int midx = s.width() / 2  + p.x();
+    int midy = s.height() / 2 + p.y();
+    this->cursor().setPos(QPoint(midx, midy));
 }
 
 void OL_WindowTitleBar::adjustMenuAndButtons()
@@ -176,6 +229,16 @@ void OL_WindowTitleBar::adjustMenuAndButtons()
         _maximize->setVisible(true);
         _restore->setVisible(false);
     }
+}
+
+QApplication *OL_WindowTitleBar::application()
+{
+    return _app;
+}
+
+void OL_WindowTitleBar::activateSysMenu()
+{
+    _systemMenu->showMenu();
 }
 
 void OL_WindowTitleBar::setTitle(const QString &t)
