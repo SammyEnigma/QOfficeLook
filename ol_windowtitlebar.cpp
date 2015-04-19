@@ -209,11 +209,12 @@ void OL_WindowTitleBar::adjustMenuAndButtons()
     int state = _mainWin->windowState();
     bool restore = state != Qt::WindowNoState;
     bool maximize = state != Qt::WindowMaximized;
+    bool minimize = state != Qt::WindowMinimized;
 
     _smenu->actions().at(0)->setEnabled(restore);  // restore
     _smenu->actions().at(1)->setEnabled(maximize); // move
     _smenu->actions().at(2)->setEnabled(maximize); // size
-    _smenu->actions().at(3)->setEnabled(maximize); // minimize
+    _smenu->actions().at(3)->setEnabled(minimize); // minimize
     _smenu->actions().at(4)->setEnabled(maximize); // maximize
 
     QGridLayout *layout = (QGridLayout *) this->layout();

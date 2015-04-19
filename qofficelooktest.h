@@ -2,10 +2,14 @@
 #define QOFFICELOOKTEST_H
 
 #include <QMainWindow>
+#include <qribbon.h>
 
 class QOfficeLookTest : public QMainWindow
 {
     Q_OBJECT
+
+private:
+    QRibbon *createRibbon(QWidget *parent);
 public:
     explicit QOfficeLookTest(QWidget *parent = 0);
     ~QOfficeLookTest();
