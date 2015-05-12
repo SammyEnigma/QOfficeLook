@@ -153,6 +153,11 @@ void OL_WindowTitleBar::addAction(QIcon &icon, const QObject *receiver, const ch
     l->addWidget(btn);
 }
 
+void OL_WindowTitleBar::addLeftAction(QIcon &icon, const QObject *receiver, const char *slot, const QString &tooltip, const QKeySequence &shortcut)
+{
+    addAction(icon, receiver, slot, tooltip, shortcut);
+}
+
 void OL_WindowTitleBar::addRightAction(QIcon &icon, const QObject *receiver, const char *slot, const QString &tooltip, const QKeySequence &shortcut)
 {
     QPushButton *btn = new OL_FlatButton(icon, _rightActions);
