@@ -73,7 +73,7 @@ OL_WindowTitleBar::OL_WindowTitleBar(QApplication * a, QMainWindow * w, QWidget 
     _smenu->addSeparator();
     _smenu->addAction(QIcon(":/icons/close.svg"), tr("&Close"), this, SLOT(slot_close()), QKeySequence::Quit);
     _systemMenu->setMenu(_smenu);
-    _systemMenu->setStyleSheet("QPushButton::menu-indicator { image: url(none.jpg); }");
+    _systemMenu->addStyleSheet("::menu-indicator { image: url(none.jpg); }");
 
     _close = new OL_FlatButton(QIcon(":/icons/close.svg"),  parent);
     connect(_close, SIGNAL(clicked()), this, SLOT(slot_close()));

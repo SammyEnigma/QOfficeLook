@@ -38,8 +38,6 @@ QOfficeLookTest::QOfficeLookTest(QWidget *parent) : QMainWindow(parent)
     v->addWidget(new QLabel("Hi!"));
     v->addWidget(new QPushButton("JO!"));*/
 
-
-
     QRibbon *ribbon = createRibbon(this);
 
     layout->addWidget(ribbon);
