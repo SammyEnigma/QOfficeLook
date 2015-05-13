@@ -45,7 +45,11 @@ QOfficeLook *QOfficeLook::adaptMainWindow(QApplication *app, QMainWindow *w)
 
     QStatusBar *bar = new QStatusBar(w);
     bar->setObjectName("QOfficeLookBar");
-    bar->setStyleSheet("#QOfficeLookBar { background: #333333; color: #ebebeb; }");
+    bar->setStyleSheet("#QOfficeLookBar { background: #333333; color: #ebebeb; }\n"
+                       "#QOfficeLookBar QPushButton { background: #333333; color: #ebebeb; }\n"
+                       "#QOfficeLookBar QPushButton::hover { background: #3e6db5; color: #ebebeb; }\n"
+                       );
+
     layout->addWidget(bar);
 
     QOfficeLook *officeLook = new QOfficeLook();

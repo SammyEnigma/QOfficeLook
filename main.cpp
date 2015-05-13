@@ -13,6 +13,10 @@ int main(int argc, char *argv[])
     mainWin.setWindowIcon(QIcon(":/icons/application.svg"));
     QOfficeLook *look = QOfficeLook::adaptMainWindow(&app, &mainWin);
     look->addRightAction(QIcon(":/icons/help.svg"), &mainWin, SLOT(slot_restore()));
+    QStatusBar *bar = look->statusBar();
+    bar->showMessage("Hi");
+    QPushButton *button = new QPushButton( "Hi there");
+    bar->addPermanentWidget(button);
     mainWin.show();
     int exitcode = app.exec();
     delete look;
