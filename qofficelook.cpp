@@ -43,9 +43,15 @@ QOfficeLook *QOfficeLook::adaptMainWindow(QApplication *app, QMainWindow *w)
     w->setCentralWidget(frame);
     w->setWindowFlags(Qt::FramelessWindowHint);
 
+    QStatusBar *bar = new QStatusBar(w);
+    bar->setObjectName("QOfficeLookBar");
+    bar->setStyleSheet("#QOfficeLookBar { background: #333333; color: #ebebeb; }");
+    layout->addWidget(bar);
+
     QOfficeLook *officeLook = new QOfficeLook();
     officeLook->_mainWin = w;
     officeLook->_titleBar = tb;
+    officeLook->_statusbar = bar;
 
     return officeLook;
 }
@@ -63,6 +69,11 @@ void QOfficeLook::addAction(QIcon &icon, const QObject *receiver, const char *sl
 void QOfficeLook::addRightAction(QIcon &icon, const QObject *receiver, const char *slot, const QString &tooltip, const QKeySequence &shortcut)
 {
     ((OL_WindowTitleBar *) _titleBar)->addRightAction(icon,receiver,slot,tooltip,shortcut);
+}
+
+QStatusBar *QOfficeLook::statusBar()
+{
+    return this->_statusbar;
 }
 
 
