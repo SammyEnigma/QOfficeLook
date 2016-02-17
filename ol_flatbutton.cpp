@@ -5,7 +5,12 @@
 
 int OL_FlatButton::button_number = 0;
 
-OL_FlatButton::OL_FlatButton(QIcon & icon, QWidget *parent) : QPushButton(icon, "", parent)
+OL_FlatButton::OL_FlatButton(const QIcon icon, QWidget *parent) : QPushButton(icon, "", parent)
+{
+    init(icon, parent);
+}
+
+void OL_FlatButton::init(QIcon icon, QWidget *parent)
 {
     this->setFlat(true);
     this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -30,10 +35,10 @@ void OL_FlatButton::addStyleSheet(const QString &s, bool specific)
     } else {
         c = c.append("\n" + s);
     }
-    QMessageBox * msgBox  = new QMessageBox();
+    /*QMessageBox * msgBox  = new QMessageBox();
     msgBox->setWindowTitle("addStyleSheet");
     msgBox->setText(c);
-    msgBox->show();
+    msgBox->show();*/
     //delete msgBox;
     this->setStyleSheet(c);
 }

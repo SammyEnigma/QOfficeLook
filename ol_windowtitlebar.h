@@ -35,9 +35,9 @@ public:
     void toggleSize();
 
 public:
-    void addAction(QIcon &icon, const QObject *receiver, const char *slot = 0, const QString &tooltip = 0, const QKeySequence & shortcut = 0);
-    void addLeftAction(QIcon &icon, const QObject *receiver, const char *slot = 0, const QString &tooltip = 0, const QKeySequence & shortcut = 0);
-    void addRightAction(QIcon &icon, const QObject *receiver = 0, const char *slot = 0, const QString &tooltip = 0, const QKeySequence & shortcut = 0);
+    void addAction(const QIcon icon, const QObject *receiver, const char *slot = 0, const QString &tooltip = 0, const QKeySequence & shortcut = 0);
+    void addLeftAction(const QIcon icon, const QObject *receiver, const char *slot = 0, const QString &tooltip = 0, const QKeySequence & shortcut = 0);
+    void addRightAction(const QIcon icon, const QObject *receiver = 0, const char *slot = 0, const QString &tooltip = 0, const QKeySequence & shortcut = 0);
 
 public:
     explicit OL_WindowTitleBar(QApplication *a, QMainWindow *w, QWidget *parent = 0);

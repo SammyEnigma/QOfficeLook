@@ -48,6 +48,8 @@ QOfficeLook *QOfficeLook::adaptMainWindow(QApplication *app, QMainWindow *w)
     bar->setStyleSheet("#QOfficeLookBar { background: #333333; color: #ebebeb; }\n"
                        "#QOfficeLookBar QPushButton { background: #333333; color: #ebebeb; }\n"
                        "#QOfficeLookBar QPushButton::hover { background: #3e6db5; color: #ecf1f8; }\n"
+                       "#QOfficeLookBar QLabel { background: #333333; color: #ebebeb; }\n"
+                       "/*#QOfficeLookBar QLabel::hover { background: #3e6db5; color: #ecf1f8; }*/\n"
                        );
 
     layout->addWidget(bar);
@@ -65,12 +67,12 @@ QMainWindow *QOfficeLook::mainWindow()
     return _mainWin;
 }
 
-void QOfficeLook::addAction(QIcon &icon, const QObject *receiver, const char *slot, const QString &tooltip, const QKeySequence &shortcut)
+void QOfficeLook::addAction(const QIcon icon, const QObject *receiver, const char *slot, const QString &tooltip, const QKeySequence &shortcut)
 {
     ((OL_WindowTitleBar *) _titleBar)->addAction(icon,receiver,slot,tooltip,shortcut);
 }
 
-void QOfficeLook::addRightAction(QIcon &icon, const QObject *receiver, const char *slot, const QString &tooltip, const QKeySequence &shortcut)
+void QOfficeLook::addRightAction(const QIcon icon, const QObject *receiver, const char *slot, const QString &tooltip, const QKeySequence &shortcut)
 {
     ((OL_WindowTitleBar *) _titleBar)->addRightAction(icon,receiver,slot,tooltip,shortcut);
 }

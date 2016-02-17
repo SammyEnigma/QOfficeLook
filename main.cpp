@@ -1,5 +1,6 @@
 //#include <vld.h>
 #include <QApplication>
+#include <QLabel>
 #include "qofficelooktest.h"
 #include "qofficelook.h"
 
@@ -17,6 +18,8 @@ int main(int argc, char *argv[])
     bar->showMessage("Hi");
     QPushButton *button = new QPushButton( "Hi there");
     bar->addPermanentWidget(button);
+    QLabel *lab = new QLabel("test");
+    bar->addPermanentWidget(lab);
     mainWin.show();
     int exitcode = app.exec();
     delete look;
