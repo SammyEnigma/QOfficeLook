@@ -1,4 +1,3 @@
-//#include <vld.h>
 #include <QApplication>
 #include <QLabel>
 #include "qofficelooktest.h"
